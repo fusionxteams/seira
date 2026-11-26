@@ -274,56 +274,75 @@ export function HomePage({ onOpenBooking }: HomePageProps) {
       {/* 3. Modern Bento-Grid Treatment Showcase */}
       <ServicesBentoGrid onOpenBooking={onOpenBooking} />
 
-      {/* 4. Dark Glass Atelier Philosophy Over Full-Bleed Clinic Reception */}
-      <section className="relative overflow-hidden bg-[var(--color-ink)] py-20 md:py-28">
-        <img
-          src="/images/clinic-interior.jpeg"
-          alt="Seira Wellness clinic reception"
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
-        />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
-          <div className="max-w-3xl rounded-3xl border border-white/15 bg-[var(--color-ink)]/75 p-8 text-[var(--color-cream)] shadow-[0_24px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl md:p-12">
-            <h2 className="text-3xl leading-tight text-[var(--color-cream)] md:text-5xl">
-              {ABOUT_CONTENT.headline}
-            </h2>
-            <p className="mt-6 text-base leading-relaxed text-[var(--color-cream)]/80">
-              {ABOUT_CONTENT.intro}
-            </p>
+      {/* 4. Editorial Split — Philosophy */}
+      <section className="overflow-hidden bg-[var(--color-cream-soft)]">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-2">
 
-            <div className="mt-10 grid grid-cols-1 gap-6 border-t border-white/15 pt-8 sm:grid-cols-3">
-              <div>
-                <UserCheck className="h-5 w-5 text-[var(--color-gold-light)]" strokeWidth={1.5} />
-                <h3 className="mt-3 text-lg text-[var(--color-cream)]">Patient-Centred</h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--color-cream)]/70">
-                  Listening carefully before recommending any procedure.
-                </p>
-              </div>
-              <div>
-                <Sparkles className="h-5 w-5 text-[var(--color-gold-light)]" strokeWidth={1.5} />
-                <h3 className="mt-3 text-lg text-[var(--color-cream)]">Natural Results</h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--color-cream)]/70">
-                  Balanced outcomes that enhance your natural features.
-                </p>
-              </div>
-              <div>
-                <ShieldCheck className="h-5 w-5 text-[var(--color-gold-light)]" strokeWidth={1.5} />
-                <h3 className="mt-3 text-lg text-[var(--color-cream)]">Ethical Practice</h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--color-cream)]/70">
-                  Modern clinical technology with transparent guidance.
-                </p>
-              </div>
+          {/* Left — typographic editorial column */}
+          <div className="flex flex-col justify-between gap-10 px-6 py-16 md:px-12 md:py-24">
+            {/* Eyebrow */}
+            <span className="text-[11px] font-medium tracking-[0.18em] text-[var(--color-gold)] uppercase">
+              Our Philosophy
+            </span>
+
+            {/* Large italic serif headline */}
+            <div>
+              <h2 className="font-[var(--font-display)] text-[clamp(2rem,4.5vw,3.5rem)] italic leading-[1.08] tracking-[-0.01em] text-[var(--color-ink)]">
+                "{ABOUT_CONTENT.headline}"
+              </h2>
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-[var(--color-ink-muted)]">
+                {ABOUT_CONTENT.intro}
+              </p>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-cream)] px-6 py-3 text-sm font-medium text-[var(--color-espresso)] transition-colors hover:bg-[var(--color-gold-light)]"
-              >
-                Our Story &amp; Values
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </Link>
+            {/* Three ruled principle lines */}
+            <div className="flex flex-col divide-y divide-[var(--color-border)]">
+              {[
+                { label: 'Patient-Centred', sub: 'We listen before we recommend' },
+                { label: 'Natural Results', sub: 'Outcomes that enhance, not alter' },
+                { label: 'Ethical Practice', sub: 'Science-backed, transparently guided' },
+              ].map(({ label, sub }) => (
+                <div
+                  key={label}
+                  className="group flex items-center justify-between gap-4 py-4 transition-colors hover:text-[var(--color-gold)]"
+                >
+                  <span className="text-sm font-medium text-[var(--color-ink)] group-hover:text-[var(--color-gold)] transition-colors">
+                    {label}
+                  </span>
+                  <span className="text-right text-xs text-[var(--color-ink-muted)]">{sub}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA row */}
+            <Link
+              to="/about"
+              className="inline-flex w-fit items-center gap-2 border-b border-[var(--color-ink)] pb-0.5 text-sm font-medium text-[var(--color-ink)] transition-colors hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]"
+            >
+              Our Story &amp; Values <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </Link>
+          </div>
+
+          {/* Right — full-bleed portrait crop */}
+          <div className="relative min-h-[340px] overflow-hidden md:min-h-0">
+            <img
+              src="/images/clinic-interior.jpeg"
+              alt="Seira Wellness clinic"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            {/* Subtle warm-left fade to blend with left column */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-cream-soft)] via-transparent to-transparent md:from-[var(--color-cream-soft)]/60" />
+
+            {/* Floating stat badge bottom-right */}
+            <div className="absolute bottom-6 right-6 rounded-2xl border border-white/20 bg-[#181512]/80 px-5 py-4 text-white backdrop-blur-md">
+              <p className="text-[11px] font-medium tracking-widest text-[var(--color-gold)] uppercase">
+                Est. 2019
+              </p>
+              <p className="mt-1 text-2xl font-semibold tabular-nums">3,000+</p>
+              <p className="text-xs text-white/60">Consultations delivered</p>
             </div>
           </div>
+
         </div>
       </section>
     </div>
