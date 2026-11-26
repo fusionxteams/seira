@@ -49,19 +49,22 @@ export function AppointmentModal({
 
   const getSlots = useCallback(async ({ from, to }: { from: Date; to: Date }) => {
     const slots: Date[] = [];
-    const now = new Date();
+    const now = Date.now();
     const cursor = new Date(from);
-    cursor.setHours(0, 0, 0, 0);
+    cursor.setUTCHours(0, 0, 0, 0);
 
-    while (cursor <= to) {
-      if (cursor.getDay() !== 0) {
+    while (cursor.getTime() < to.getTime()) {
+      const dow = cursor.getUTCDay();
+      if (dow !== 0) {
         for (const { hour, minute } of CLINIC_SLOT_HOURS) {
           const slot = new Date(cursor);
           slot.setHours(hour, minute, 0, 0);
-          if (slot > now) slots.push(slot);
+          if (slot.getTime() > now && slot.getTime() >= from.getTime() && slot.getTime() < to.getTime()) {
+            slots.push(slot);
+          }
         }
       }
-      cursor.setDate(cursor.getDate() + 1);
+      cursor.setUTCDate(cursor.getUTCDate() + 1);
     }
     return slots;
   }, []);

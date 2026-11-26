@@ -40,21 +40,28 @@ export function ContactPage() {
 
   const getSlots = useCallback(async ({ from, to }: { from: Date; to: Date }) => {
     const slots: Date[] = [];
-    const now = new Date();
-    const cursor = new Date(from);
-    cursor.setHours(0, 0, 0, 0);
+    const now = Date.now();
+    // Iterate day by day using UTC dates to match the booking component's range
+    const start = new Date(from);
+    const end = new Date(to);
+    // Walk from the first day to the last
+    const cursor = new Date(start);
+    cursor.setUTCHours(0, 0, 0, 0);
 
-    while (cursor <= to) {
-      if (cursor.getDay() !== 0) {
+    while (cursor.getTime() < end.getTime()) {
+      const dow = cursor.getUTCDay(); // 0=Sun
+      if (dow !== 0) {
         for (const { hour, minute } of CLINIC_SLOT_HOURS) {
+          // Build slot at the correct local time (IST = UTC+5:30)
           const slot = new Date(cursor);
+          // Set the slot time in local hours (browser is IST)
           slot.setHours(hour, minute, 0, 0);
-          if (slot > now) {
+          if (slot.getTime() > now && slot.getTime() >= from.getTime() && slot.getTime() < to.getTime()) {
             slots.push(slot);
           }
         }
       }
-      cursor.setDate(cursor.getDate() + 1);
+      cursor.setUTCDate(cursor.getUTCDate() + 1);
     }
     return slots;
   }, []);
