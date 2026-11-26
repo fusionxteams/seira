@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Warm dark background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1612;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f0d0a;stop-opacity:1" />
+    </linearGradient>
+    <!-- Gold shimmer on headline -->
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D9A432;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F0C060;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C8922A;stop-opacity:1" />
+    </linearGradient>
+    <!-- Soft vignette overlay -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="80%">
+      <stop offset="40%" style="stop-color:#000000;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.45" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Subtle warm noise texture lines -->
+  <line x1="0" y1="315" x2="1200" y2="315" stroke="#D9A432" stroke-width="0.5" stroke-opacity="0.08" />
+  <line x1="600" y1="0" x2="600" y2="630" stroke="#D9A432" stroke-width="0.5" stroke-opacity="0.06" />
+
+  <!-- Left decorative gold bar -->
+  <rect x="80" y="80" width="3" height="470" fill="url(#gold)" rx="2" />
+
+  <!-- Glass card background -->
+  <rect x="80" y="80" width="1040" height="470" rx="28" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1" />
+
+  <!-- Vignette -->
+  <rect width="1200" height="630" fill="url(#vignette)" />
+
+  <!-- Top eyebrow label -->
+  <text x="140" y="162" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="#D9A432" font-weight="400">SEIRA WELLNESS · VILLIVAKKAM, CHENNAI</text>
+
+  <!-- Main headline — serif italic -->
+  <text x="140" y="260" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="#FBF7EE" font-style="italic" font-weight="400" letter-spacing="-1">Welcome to</text>
+  <text x="140" y="350" font-family="Georgia, 'Times New Roman', serif" font-size="72" fill="url(#gold)" font-style="italic" font-weight="400" letter-spacing="-1">Seira Wellness</text>
+
+  <!-- Sub-tagline -->
+  <text x="140" y="408" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#FBF7EE" fill-opacity="0.60" font-weight="400" letter-spacing="0.5">Advanced Care for Skin, Hair &amp; Beauty</text>
+
+  <!-- Divider rule -->
+  <rect x="140" y="440" width="920" height="1" fill="#D9A432" fill-opacity="0.25" />
+
+  <!-- Three service tags bottom -->
+  <text x="140" y="490" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#D9A432" letter-spacing="2" font-weight="500">SKIN TREATMENTS</text>
+  <text x="410" y="490" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#D9A432" letter-spacing="2" font-weight="500">ANTI-AGING</text>
+  <text x="600" y="490" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#D9A432" letter-spacing="2" font-weight="500">HAIR CARE</text>
+  <text x="770" y="490" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#D9A432" letter-spacing="2" font-weight="500">LASER &amp; AESTHETICS</text>
+
+  <!-- URL slug bottom-right -->
+  <text x="1060" y="528" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#FBF7EE" fill-opacity="0.35" text-anchor="end">fusionxteams.github.io/seira</text>
+</svg>
