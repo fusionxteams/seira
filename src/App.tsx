@@ -35,7 +35,7 @@ export function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
       <div className="flex min-h-screen flex-col bg-[var(--color-bg)] text-[var(--color-ink)]">
         <Navbar onOpenBooking={handleOpenBooking} />
