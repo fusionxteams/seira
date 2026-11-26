@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowRight, Calendar, ShieldCheck, Sparkles, UserCheck } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import { NumberRoll } from '@/components/number-roll';
 import { ABOUT_CONTENT, SERVICES } from '../data/siteData';
 
