@@ -1,9 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Calendar, ShieldCheck, Sparkles, UserCheck } from 'lucide-react';
 import { NumberRoll } from '@/components/number-roll';
-import { ScrollStory } from '@/components/scroll-story';
 import { ABOUT_CONTENT, SERVICES } from '../data/siteData';
 
 interface HomePageProps {
@@ -11,6 +10,114 @@ interface HomePageProps {
 }
 
 const EASE_FLUID = [0.16, 1, 0.3, 1] as const;
+
+/* ─── Bento Grid: Modern Services Showcase ─── */
+function ServicesBentoGrid({ onOpenBooking }: { onOpenBooking: (t?: string) => void }) {
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  // Layout: first card is big (col-span-2 row-span-2), rest alternate
+  const cards = SERVICES.map((s, i) => ({
+    ...s,
+    big: i === 0,
+    wide: i === 3 || i === 5,
+  }));
+
+  return (
+    <section className="bg-[var(--color-bg)] py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 md:px-12">
+        {/* Header */}
+        <div className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="text-xs font-medium tracking-widest text-[var(--color-gold)] uppercase">
+              Our Disciplines
+            </span>
+            <h2 className="mt-2 max-w-xl text-3xl leading-[1.08] tracking-[-0.02em] text-[var(--color-ink)] md:text-[2.75rem]">
+              Aesthetic Care,<br className="hidden md:block" /> Designed Around You
+            </h2>
+          </div>
+          <Link
+            to="/services"
+            className="inline-flex items-center gap-2 self-start rounded-full border border-[var(--color-border)] bg-white px-5 py-2.5 text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-[var(--color-cream-soft)] md:self-auto"
+          >
+            All Services <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+          </Link>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid auto-rows-[220px] grid-cols-2 gap-3 md:auto-rows-[260px] md:grid-cols-4 md:gap-4">
+          {cards.map((service) => {
+            const isHovered = hovered === service.id;
+            const colSpan = service.big
+              ? 'col-span-2 row-span-2'
+              : service.wide
+              ? 'col-span-2'
+              : 'col-span-1';
+            return (
+              <motion.button
+                key={service.id}
+                type="button"
+                onClick={() => onOpenBooking(service.title)}
+                onHoverStart={() => setHovered(service.id)}
+                onHoverEnd={() => setHovered(null)}
+                className={`group relative overflow-hidden rounded-2xl bg-[var(--color-cream-soft)] text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)] md:rounded-3xl ${colSpan}`}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Background image */}
+                <motion.img
+                  src={service.image}
+                  alt={service.title}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  animate={{ scale: isHovered ? 1.06 : 1 }}
+                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                />
+
+                {/* Gradient overlay — always dark at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#181512]/90 via-[#181512]/30 to-transparent" />
+
+                {/* Number badge top-left */}
+                <span className="absolute left-3 top-3 rounded-full bg-white/15 px-2.5 py-0.5 text-[11px] font-medium tracking-wider text-white/90 backdrop-blur-sm md:left-4 md:top-4">
+                  {service.number}
+                </span>
+
+                {/* Book pill top-right — appears on hover */}
+                <motion.span
+                  className="absolute right-3 top-3 rounded-full bg-[var(--color-gold)] px-3 py-1 text-[11px] font-semibold text-[#181512] md:right-4 md:top-4"
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : -6 }}
+                  transition={{ duration: 0.22 }}
+                >
+                  Book →
+                </motion.span>
+
+                {/* Text at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+                  <h3
+                    className={`font-medium leading-tight text-white ${
+                      service.big ? 'text-xl md:text-2xl' : 'text-sm md:text-base'
+                    }`}
+                  >
+                    {service.title}
+                  </h3>
+                  <motion.p
+                    className="mt-1 text-xs leading-relaxed text-white/70"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{
+                      opacity: isHovered ? 1 : 0,
+                      height: isHovered ? 'auto' : 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {service.summary}
+                  </motion.p>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export function HomePage({ onOpenBooking }: HomePageProps) {
   const heroRef = useRef<HTMLElement>(null);
@@ -164,44 +271,8 @@ export function HomePage({ onOpenBooking }: HomePageProps) {
         </motion.div>
       </div>
 
-      {/* 3. Real @hairline/scroll-story Treatment Showcase */}
-      <section className="bg-[var(--color-cream-soft)] py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-6 md:px-12">
-          <div className="mb-12 max-w-2xl">
-            <h2 className="text-3xl leading-tight text-[var(--color-ink)] md:text-5xl">
-              Aesthetic Care, Designed Around You
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[var(--color-ink-muted)]">
-              Scroll through our seven specialized disciplines — or click any step to inspect how
-              we tailor each protocol.
-            </p>
-          </div>
-
-          <ScrollStory
-            steps={SERVICES.map((service) => ({
-              title: service.title,
-              body: <p>{service.summary}</p>,
-              visual: (
-                <div className="w-full max-w-[340px] overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] sm:max-w-[420px] lg:max-w-[520px]">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="aspect-[16/10] w-full object-cover"
-                  />
-                  <div className="p-5">
-                    <div className="text-sm font-medium text-[var(--color-espresso)]">
-                      {service.title}
-                    </div>
-                    <p className="mt-1 text-xs leading-relaxed text-[var(--color-ink-muted)]">
-                      {service.details}
-                    </p>
-                  </div>
-                </div>
-              ),
-            }))}
-          />
-        </div>
-      </section>
+      {/* 3. Modern Bento-Grid Treatment Showcase */}
+      <ServicesBentoGrid onOpenBooking={onOpenBooking} />
 
       {/* 4. Dark Glass Atelier Philosophy Over Full-Bleed Clinic Reception */}
       <section className="relative overflow-hidden bg-[var(--color-ink)] py-20 md:py-28">
