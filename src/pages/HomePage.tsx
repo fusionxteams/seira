@@ -274,54 +274,63 @@ export function HomePage({ onOpenBooking }: HomePageProps) {
       {/* 3. Modern Bento-Grid Treatment Showcase */}
       <ServicesBentoGrid onOpenBooking={onOpenBooking} />
 
-      {/* 4. Dark Glass Atelier Philosophy Over Full-Bleed Clinic Reception */}
-      <section className="relative overflow-hidden bg-[var(--color-ink)] py-20 md:py-28">
+      {/* 4. Dark Glass Full-Width Horizontal Band */}
+      <section className="relative overflow-hidden bg-[var(--color-ink)] py-16 md:py-24">
         <img
           src="/images/clinic-interior.jpeg"
           alt="Seira Wellness clinic reception"
-          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
+        {/* Full-width horizontal glass rectangle */}
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
-          <div className="max-w-3xl rounded-3xl border border-white/15 bg-[var(--color-ink)]/75 p-8 text-[var(--color-cream)] shadow-[0_24px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl md:p-12">
-            <h2 className="text-3xl leading-tight text-[var(--color-cream)] md:text-5xl">
-              {ABOUT_CONTENT.headline}
-            </h2>
-            <p className="mt-6 text-base leading-relaxed text-[var(--color-cream)]/80">
-              {ABOUT_CONTENT.intro}
-            </p>
+          <div className="rounded-3xl border border-white/15 bg-[var(--color-ink)]/75 px-8 py-10 shadow-[0_24px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl md:px-14 md:py-12">
+            {/* Row layout: headline | divider | three pillars | divider | CTA */}
+            <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-0">
 
-            <div className="mt-10 grid grid-cols-1 gap-6 border-t border-white/15 pt-8 sm:grid-cols-3">
-              <div>
-                <UserCheck className="h-5 w-5 text-[var(--color-gold-light)]" strokeWidth={1.5} />
-                <h3 className="mt-3 text-lg text-[var(--color-cream)]">Patient-Centred</h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--color-cream)]/70">
-                  Listening carefully before recommending any procedure.
+              {/* Headline block */}
+              <div className="shrink-0 md:w-72 md:pr-10">
+                <h2 className="text-2xl leading-snug text-[var(--color-cream)] md:text-3xl">
+                  {ABOUT_CONTENT.headline}
+                </h2>
+                <p className="mt-3 text-xs leading-relaxed text-[var(--color-cream)]/65">
+                  {ABOUT_CONTENT.intro}
                 </p>
               </div>
-              <div>
-                <Sparkles className="h-5 w-5 text-[var(--color-gold-light)]" strokeWidth={1.5} />
-                <h3 className="mt-3 text-lg text-[var(--color-cream)]">Natural Results</h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--color-cream)]/70">
-                  Balanced outcomes that enhance your natural features.
-                </p>
-              </div>
-              <div>
-                <ShieldCheck className="h-5 w-5 text-[var(--color-gold-light)]" strokeWidth={1.5} />
-                <h3 className="mt-3 text-lg text-[var(--color-cream)]">Ethical Practice</h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--color-cream)]/70">
-                  Modern clinical technology with transparent guidance.
-                </p>
-              </div>
-            </div>
 
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-cream)] px-6 py-3 text-sm font-medium text-[var(--color-espresso)] transition-colors hover:bg-[var(--color-gold-light)]"
-              >
-                Our Story &amp; Values
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </Link>
+              {/* Vertical divider */}
+              <div className="hidden w-px self-stretch bg-white/15 md:block" />
+
+              {/* Three pillars in a row */}
+              <div className="flex flex-1 flex-col gap-6 md:flex-row md:gap-0 md:divide-x md:divide-white/15 md:px-6">
+                {[
+                  { Icon: UserCheck, label: 'Patient-Centred', sub: 'Listening carefully before recommending any procedure.' },
+                  { Icon: Sparkles,  label: 'Natural Results',  sub: 'Balanced outcomes that enhance your natural features.' },
+                  { Icon: ShieldCheck, label: 'Ethical Practice', sub: 'Modern clinical technology with transparent guidance.' },
+                ].map(({ Icon, label, sub }) => (
+                  <div key={label} className="flex items-start gap-3 md:flex-1 md:px-6">
+                    <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-gold-light)]" strokeWidth={1.5} />
+                    <div>
+                      <p className="text-sm font-medium text-[var(--color-cream)]">{label}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-[var(--color-cream)]/60">{sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Vertical divider */}
+              <div className="hidden w-px self-stretch bg-white/15 md:block" />
+
+              {/* CTA */}
+              <div className="shrink-0 md:pl-10">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--color-cream)] px-6 py-3 text-sm font-medium text-[var(--color-espresso)] transition-colors hover:bg-[var(--color-gold-light)] whitespace-nowrap"
+                >
+                  Our Story
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                </Link>
+              </div>
+
             </div>
           </div>
         </div>
