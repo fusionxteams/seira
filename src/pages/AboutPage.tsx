@@ -63,9 +63,9 @@ export function AboutPage() {
       {/* 1. Sticky Scroll-Driven Horizontal Filmstrip Banner */}
       <section
         ref={stripRef}
-        className="relative h-[200vh] bg-[var(--color-cream-soft)]"
+        className="relative h-[130vh] bg-[var(--color-cream-soft)] md:h-[200vh]"
       >
-        <div className="sticky top-20 flex h-[calc(100vh-5rem)] flex-col justify-center overflow-x-clip py-6">
+        <div className="sticky top-16 flex h-[calc(100vh-4rem)] flex-col justify-center overflow-x-clip py-4 md:top-20 md:h-[calc(100vh-5rem)] md:py-6">
           <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
@@ -78,17 +78,17 @@ export function AboutPage() {
           </div>
 
           {/* Horizontal Filmstrip that stops flush with the right edge of the viewport */}
-          <div ref={viewportRef} className="mt-8 overflow-x-clip">
+          <div ref={viewportRef} className="mt-4 overflow-x-clip md:mt-8">
             <ImageViewer>
               <motion.div
                 ref={trackRef}
                 style={{ x: stripX }}
-                className="flex w-max gap-5 px-6 will-change-transform md:px-12"
+                className="flex w-max gap-3 px-6 will-change-transform md:gap-5 md:px-12"
               >
                 {FILMSTRIP_IMAGES.map((img) => (
                   <div
                     key={img.src}
-                    className="w-72 shrink-0 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white sm:w-80 md:w-[420px]"
+                    className="w-56 shrink-0 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white sm:w-72 md:w-[420px]"
                   >
                     <img
                       src={img.src}
@@ -102,7 +102,7 @@ export function AboutPage() {
           </div>
 
           {/* Subtitle & Details Below */}
-          <div className="mx-auto mt-8 w-full max-w-7xl px-6 md:px-12">
+          <div className="mx-auto mt-4 w-full max-w-7xl px-6 md:mt-8 md:px-12">
             <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-12">
               <h2 className="text-2xl text-[var(--color-ink)] md:col-span-7 md:text-3xl">
                 {ABOUT_CONTENT.headline}
